@@ -8,6 +8,10 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Main from "../Layout/Main";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import Products from "../pages/Dashboard/Products/Products";
+import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
+import Subscription from "../pages/Dashboard/Subscription/Subscription";
 
 export const router = createBrowserRouter([
     {
@@ -38,4 +42,22 @@ export const router = createBrowserRouter([
         }
       ]
     },
+    {
+      path:'dashboard',
+      element: <Dashboard></Dashboard>,
+      children:[
+        {
+          path:'products',
+          element:<Products></Products>
+        },
+        {
+          path:'addProduct',
+          element:<AddProduct></AddProduct>
+        },
+        {
+          path:'subscription',
+          element:<Subscription></Subscription>
+        }
+      ]
+    }
   ]);

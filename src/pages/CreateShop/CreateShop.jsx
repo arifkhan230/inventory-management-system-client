@@ -17,49 +17,52 @@ const CreateShop = () => {
         const shopName = form.shopName.value;
         const shopInfo = form.info.value;
         const location = form.location.value;
-        const userEmail = form.email.value;
-        const userName = form.ownerName.value;
+        const email = form.email.value;
+        const name = form.ownerName.value;
         const image = form.image.files[0]
         const shopLogo = await imageUpload(image)
 
-        console.log({ shopName, shopInfo, location, userEmail, userName })
+        console.log({ shopName, shopInfo, location, })
         console.log(shopLogo.data.display_url)
 
         const shopData = {
             shopName,
             shopInfo,
             location,
-            userEmail,
-            userName,
+            email,
+            name,
             shopLogo: shopLogo.data.display_url
         }
 
-
+        console.log(user.email)
         try {
             const { data } = await axiosPublic.post('/shops', shopData)
             if (data?.insertedId) {
                 const managerInfo = {
                     shopName,
-                    shopLogo: shopLogo.data.display_url,
+                    shopLogo: shopLogo?.data?.display_url,
                     shopId: data?.insertedId,
                     role: "manager"
                 }
-                const res = await axiosPublic.patch(`/users/manager/${user.email}`, managerInfo)
+                const res = await axiosPublic.patch(`/users/manager/${email}`, managerInfo)
                 if (res.data.modifiedCount > 0) {
                     toast.success('Shop Added successfully')
+                    console.log(res)
                 }
             }
-            toast.error(data.message)
-        } catch(err){
+            else {
+                toast.error(data.message)
+            }
+        } catch (err) {
             console.log(err)
-          
+
         }
 
 
 
-            // console.log(err.message)
-            // toast.error(err.message)
-        
+        // console.log(err.message)
+        // toast.error(err.message)
+
 
 
     }

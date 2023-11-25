@@ -56,8 +56,8 @@ const Register = () => {
                 })
                     .then(() => {
                         const userInfo = {
-                            userEmail: result.user.email,
-                            userName: result.user.displayName
+                            email: result.user.email,
+                            name: result.user.displayName
                         }
                         console.log('profile updated')
 
