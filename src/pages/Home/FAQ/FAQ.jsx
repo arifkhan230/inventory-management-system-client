@@ -10,7 +10,7 @@ const FAQ = () => {
                 <div className="flex flex-col md:flex-row my-20 gap-6 px-4 lg:px-0">
 
                     <div className="flex-1">
-                        <img className="h-[620px] object-cover rounded-md  w-full" src={"https://i.ibb.co/Mc3rLHn/graphic-question-mark-asking-symbol.jpg"} alt="" />
+                        <img className="h-[650px] object-cover rounded-md  w-full" src={"https://i.ibb.co/p08Lf9b/african-american-man-wearing-round-glasses.jpg"} alt="" />
                     </div>
                     <div className="flex-1 bg-white p-6 border shadow-xl rounded">
                         <div className="collapse collapse-arrow bg-base-200 mb-4">
