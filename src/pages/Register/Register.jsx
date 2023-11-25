@@ -1,14 +1,83 @@
 import { Link } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import registerImage from "../../assets/images/loginImage.jpg"
-import { FaImage, FaLock, FaUserCircle } from "react-icons/fa";
+import { FaLock, FaUserCircle } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { imageUpload } from "../../api/utils";
+import { updateProfile } from "firebase/auth";
 
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
 
-    const handleRegister = (event) => {
+    const { createUser } = useAuth()
+
+    const handleRegister = async (event) => {
         event.preventDefault()
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+        const image = form.image.files[0]
+
+        const uploadedImage = await imageUpload(image)
+        console.log(uploadedImage);
+
+
+
+        console.log({ name, email, password, image })
+
+
+        // validation for email and password
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) {
+            toast.error('Please provide an valid email')
+            return;
+        }
+        if (!/^(?=.*[A-Z])(?=.*[!@#$%^&*])(.{6,})$/.test(password)) {
+            toast.error('Your password should have at least 6 character, one uppercase letter, one special character')
+            return;
+        }
+        if (password !== confirmPassword) {
+            toast.error('Password not matched')
+            return;
+        }
+
+        // creating user using email password
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+                updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: uploadedImage?.data?.display_url,
+                })
+                    .then(() => {
+                        const userInfo = {
+                            userEmail: result.user.email,
+                            userName: result.user.displayName
+                        }
+                        console.log('profile updated')
+
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                console.log(res.data)
+                                toast.success('successfully registered')
+                            })
+
+                        // window.location.reload()
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            })
+            .catch(err => {
+                console.log(err.message)
+                toast.error(err.message)
+            })
     }
 
     return (
@@ -82,14 +151,14 @@ const Register = () => {
                                 className="file-input w-full max-w-xs"
                                 id="photo"
                                 required />
-                        </div>  
+                        </div>
 
                         <div className='mt-6'>
                             <button className='btn w-full text-white  bg-purple-400 hover:bg-purple-600' type="submit">Register</button>
                         </div>
                     </form>
-                    <p 
-                    className='mt-4 text-center font-medium'>
+                    <p
+                        className='mt-4 text-center font-medium'>
                         Already have an account? Please <Link to="/login" className='text-blue-800 underline'>Login</Link> </p>
                 </div>
             </div>
