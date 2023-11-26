@@ -58,9 +58,9 @@ const Dashboard = () => {
 
     return (
         <Container>
-            <div className="min-h-screen flex flex-col md:flex-row ">
+            <div className="min-h-screen  flex flex-col md:flex-row ">
                 <div>
-                    <div className="hidden lg:block min-h-screen w-64 bg-zinc-200 px-10 py-5 space-y-3">
+                    <div className="hidden lg:block min-h-full w-64 bg-zinc-200 px-10 py-5 space-y-3">
                         <span className="text-xl font-medium">My System</span>
                         <ul className="menu p-4">{dashLink}</ul>
                     </div>
