@@ -47,7 +47,7 @@ const Products = () => {
     return (
         <div>
             <div className="flex justify-between items-center my-10  border-b-2 border-t-2">
-                <h2 className="text-3xl font-bold">Total {products.length} Products</h2>
+                <h2 className="text-3xl font-bold">Total {products?.length} Products</h2>
                 <Link to="/dashboard/addProduct">
                     <button className="btn btn-primary">Add Product</button>
                 </Link>

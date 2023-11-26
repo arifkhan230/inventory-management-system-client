@@ -111,7 +111,7 @@ const AddProduct = () => {
                                     <span className="label-text text-lg font-medium">Product Quantity</span>
                                 </label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     name="quantity"
                                     placeholder="Please Enter Product Quantity "
                                     className="input input-bordered"

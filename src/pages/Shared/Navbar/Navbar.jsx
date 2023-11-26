@@ -35,7 +35,7 @@ const Navbar = () => {
         }
         > Watch Demo</NavLink>
 
-        <NavLink to="/dashboard/products" className={({ isActive, isPending }) =>
+        <NavLink to="/dashboard/manageProducts" className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "text-lg text-[#638ecb] font-bold mr-4" : "text-lg font-semibold mr-4"
         }
         > DashBoard</NavLink>

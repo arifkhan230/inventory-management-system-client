@@ -13,6 +13,8 @@ import Products from "../pages/Dashboard/Products/Products";
 import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 import Subscription from "../pages/Dashboard/Subscription/Subscription";
 import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
+import SalesCollection from "../pages/Dashboard/SalesCollection/SalesCollection";
+import Checkout from "../pages/Dashboard/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,7 @@ export const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: 'products',
+        path: 'manageProducts',
         element: <Products></Products>
       },
       {
@@ -61,7 +63,14 @@ export const router = createBrowserRouter([
         loader: ({params}) => fetch(`http://localhost:5000/singleProduct/${params.id}`)
 
       },
-
+      {
+        path:'salesCollection',
+        element:<SalesCollection></SalesCollection>
+      },
+      {
+        path:'checkout',
+        element:<Checkout></Checkout>
+      },
       {
         path: 'subscription',
         element: <Subscription></Subscription>

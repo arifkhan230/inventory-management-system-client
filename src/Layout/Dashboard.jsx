@@ -1,21 +1,21 @@
 import { NavLink, Outlet } from "react-router-dom";
 import Container from "../Components/Container/Container";
-import { FaBars, FaCartPlus, FaHome, FaList, FaShoppingBag, FaYoutube } from "react-icons/fa";
+import { FaBars, FaCheck, FaHome, FaMoneyBillAlt, FaRegEdit, FaShoppingBag, FaYoutube } from "react-icons/fa";
 
 
 const Dashboard = () => {
 
-    const linkStyle = "flex justify-center items-center gap-1 font-medium text-white  my-4 py-1 rounded w-full bg-black"
+    const linkStyle = "flex justify-center items-center gap-1 font-medium text-white  my-4 py-2 rounded w-full bg-black"
 
     const dashLink =
         <>
             <li>
                 <NavLink
                     className={linkStyle}
-                    to="/dashboard/products"
+                    to="/dashboard/manageProducts"
                 >
-                    <FaCartPlus />
-                    Products
+                    <FaRegEdit />
+                    Manage Product
                 </NavLink>
             </li>
             <li>
@@ -30,21 +30,31 @@ const Dashboard = () => {
             <li>
                 <NavLink
                     className={linkStyle}
+                    to="/dashboard/salesCollection"
+                >
+                    <FaMoneyBillAlt />
+                    Sales Collection
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={linkStyle}
+                    to="/dashboard/checkout"
+                >
+                    <FaCheck />
+                    Checkout
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={linkStyle}
                     to="/"
                 >
                     <FaHome />
                     Home
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/our-menu"
-                >
-                    <FaList />
-                    Menu
-                </NavLink>
-            </li>
+            
             <li>
                 <button
                     className={linkStyle}
@@ -62,7 +72,7 @@ const Dashboard = () => {
                 <div>
                     <div className="hidden lg:block min-h-full w-64 bg-zinc-200 px-10 py-5 space-y-3">
                         <span className="text-xl font-medium">My System</span>
-                        <ul className="menu p-4">{dashLink}</ul>
+                        <ul className="menu">{dashLink}</ul>
                     </div>
 
                     <div className="lg:hidden">
