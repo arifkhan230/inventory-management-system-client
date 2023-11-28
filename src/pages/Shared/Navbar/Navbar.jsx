@@ -3,11 +3,15 @@ import Container from "../../../Components/Container/Container";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import userLogo from "../../../assets/images/profile-user.png"
+import useAdmin from "../../../Hooks/useAdmin";
+import useManager from "../../../Hooks/useManager";
 
 
 const Navbar = () => {
 
-    const { user, logOut } = useAuth()
+    const { user, logOut } = useAuth();
+    const [isAdmin] = useAdmin();
+    const [isManager] = useManager()
 
     const handleLogOut = () => {
         logOut()
@@ -35,11 +39,21 @@ const Navbar = () => {
         }
         > Watch Demo</NavLink>
 
-        <NavLink to="/dashboard/manageProducts" className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-lg text-[#638ecb] font-bold mr-4" : "text-lg font-semibold mr-4"
+        {
+            isAdmin  && 
+            <NavLink to="/dashboard/manageShop" className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-lg text-[#638ecb] font-bold mr-4" : "text-lg font-semibold mr-4"
+            }
+            > DashBoard</NavLink>
         }
-        > DashBoard</NavLink>
-        
+        {
+            isManager  && 
+            <NavLink to="/dashboard/manageProducts" className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-lg text-[#638ecb] font-bold mr-4" : "text-lg font-semibold mr-4"
+            }
+            > DashBoard</NavLink>
+        }
+
     </>
 
     return (

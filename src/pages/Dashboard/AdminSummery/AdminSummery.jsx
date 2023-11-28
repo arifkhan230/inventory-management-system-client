@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 
 const AdminSummery = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const [page,setPage] = useState(0)
 
     const { data: TotalProducts = [] } = useQuery({
         queryKey: ['totalProducts'],
@@ -27,28 +29,36 @@ const AdminSummery = () => {
     })
 
 
-    const { data: allUsers = [] } = useQuery({
-        queryKey: ['allUsers'],
+    const { data: {result = [], count=0} ={} } = useQuery({
+        queryKey: ['allUsers',page],
         queryFn: () =>
-            axiosSecure.get('/users')
+            axiosSecure.get(`/users?page=${page}`)
                 .then(res => {
                     return res.data;
+                    
                 })
 
     })
+
+
+    const totalPages = Math.ceil(count / 5);
+    console.log(totalPages);
+    const pages = [...new Array(totalPages).fill(0)]
+    console.log(pages);
+
     // console.log(TotalProducts);
     // console.log(TotalSales);
     // console.log(allUsers);
 
 
-    const itemPerPage = 1;
-    const numberOfPages = Math.ceil(allUsers.length / itemPerPage);
-    console.log(numberOfPages)
-    const pages = [...Array(numberOfPages).keys()];
-    console.log(pages);
+    // const itemPerPage = 1;
+    // const numberOfPages = Math.ceil(allUsers.length / itemPerPage);
+    // console.log(numberOfPages)
+    // const pages = [...Array(numberOfPages).keys()];
+    // console.log(pages);
 
 
-    const totalSalesAmount = TotalSales.reduce((total, item) => total + item.sellingPrice, 0)
+    // const totalSalesAmount = TotalSales.reduce((total, item) => total + item.sellingPrice, 0)
 
     return (
         <div>
@@ -66,13 +76,13 @@ const AdminSummery = () => {
                 </div>
                 <div className="bg-blue-400 p-10 text-center text-white">
                     <h2 className="text-3xl text-center">Total Sales</h2>
-                    <p className="text-2xl font-bold">$ {totalSalesAmount}</p>
+                    <p className="text-2xl font-bold">{TotalSales?.length}</p>
                 </div>
             </div>
             <div className="mt-12">
                 <h2 className="text-3xl font-bold text-center">System Users</h2>
                 <div className="overflow-x-auto mt-10">
-                    <table className="table">
+                    <table className="table w-full">
                         {/* head */}
                         <thead className="bg-gray-200">
                             <tr>
@@ -86,7 +96,7 @@ const AdminSummery = () => {
                         </thead>
                         <tbody>
                             {
-                                allUsers?.map((item, idx) => <tr key={item._id}>
+                                result?.map((item, idx) => <tr key={item._id}>
                                     <th>
                                         {idx + 1}
                                     </th>
@@ -97,10 +107,10 @@ const AdminSummery = () => {
                                         {item?.email}
                                     </td>
                                     <td>
-                                        {item?.shopName && item.shopName}
+                                        {item?.shopName ? item.shopName : "No Shop"}
                                     </td>
                                     <td>
-                                        {item?.role && item.role}
+                                        {item?.role ? item.role : "user"}
                                     </td>
                                     <td>
                                         {!item?.role &&
@@ -113,9 +123,13 @@ const AdminSummery = () => {
                 </div>
             </div>
             <div className="text-center my-10">
-                {
-                    pages.map(page => <button className="btn mr-6" key={page}>{page}</button>)
-                }
+                
+               {
+                pages.map((item,index)=> <button 
+                className={` w-7 h-7 rounded-full mr-4 ${page == index ? "text-white bg-black" : "text-black"}`} 
+                key={index} 
+                onClick={()=>setPage(index)}>{index + 1}</button>)
+               }
             </div>
         </div>
     );

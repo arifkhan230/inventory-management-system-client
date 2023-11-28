@@ -7,12 +7,14 @@ import google from "../../assets/images/google.png"
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Login = () => {
-    const {signIn,signInGoogle} = useAuth();
+    const { signIn, signInGoogle, } = useAuth();
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+
 
     const handleSignIn = (event) => {
         event.preventDefault()
@@ -22,40 +24,62 @@ const Login = () => {
         // console.log({ email, password })
 
         // signIn with email password
-        signIn(email,password)
-        .then(result=>{
-            console.log(result)
-            toast.success("Logged in successfully")
-            
-        })
+        signIn(email, password)
+            .then(async (result) => {
+                toast.success("Logged in successfully")
+                const res = await axiosSecure.get(`/users/${result.user?.email}`)
+                console.log(res.data.role)
+                if (res.data.role === 'admin') {
+                    navigate('/dashboard/manageShop')
+                }
+                if (res.data.role === 'manager') {
+                    navigate('/dashboard/manageProducts')
+                }
+                else {
+                    navigate('/createShop')
+                }
 
-        .catch(err=>{
-            console.log(err.message)
-            toast.error(err.message)
-        })
+            })
+
+            .catch(err => {
+                console.log(err.message)
+                toast.error(err.message)
+            })
     }
 
     // sign in with google 
-    const handleGoogleLogin = ()=>{
+    const handleGoogleLogin = () => {
         signInGoogle()
-        .then(result=>{
-            console.log(result);
-            const userInfo = {
-                email:result.user?.email,
-                name:result.user?.displayName
-            }
-            axiosPublic.post('/users', userInfo)
-            .then(res=>{
-                console.log(res.data)
-                toast.success("Logged in successfully")
-                navigate('/')
-            })
+            .then(async (result) => {
+                console.log(result);
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data)
+                        toast.success("Logged in successfully")
 
-        })
-        .catch(err=>{
-            console.log(err.message)
-            toast.error(err.message)
-        })
+                    })
+                const res = await axiosSecure.get(`/users/${result.user?.email}`)
+                console.log(res.data.role)
+                if (res.data.role === 'admin') {
+                    navigate('/dashboard/manageShop')
+                }
+                if (res.data.role === 'manager') {
+                    navigate('/dashboard/manageProducts')
+                }
+                else {
+                    navigate('/createShop')
+                }
+
+
+            })
+            .catch(err => {
+                console.log(err.message)
+                toast.error(err.message)
+            })
     }
 
     return (

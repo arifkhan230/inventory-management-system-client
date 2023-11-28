@@ -1,85 +1,139 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Container from "../Components/Container/Container";
-import { FaBars, FaCheck, FaDollarSign, FaHome, FaMandalorian, FaMoneyBillAlt, FaRegEdit, FaServer, FaShoppingBag, FaThList, FaYoutube } from "react-icons/fa";
+import { FaBars, FaCheck, FaDollarSign, FaHome, FaMoneyBillAlt, FaRegEdit, FaShoppingBag, FaThList, FaYoutube } from "react-icons/fa";
+import useAdmin from "../Hooks/useAdmin";
+import useManager from "../Hooks/useManager";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 const Dashboard = () => {
+    const { logOut } = useAuth()
+    const [isAdmin] = useAdmin();
+    const [isManager] = useManager()
+    const navigate = useNavigate()
+    // console.log(isAdmin);
+    console.log(isManager);
+
+    const handleLogout = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You Want To Log Out",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, !"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        toast('Logged Out successfully')
+                        navigate('/')
+                        Swal.fire({
+                            title: "Logged Out!",
+                            text: "Your Have successfully logged out.",
+                            icon: "success"
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        toast(error.message)
+                    })
+
+            }
+        });
+
+    }
 
     const linkStyle = "flex justify-center items-center gap-1 font-medium text-white  my-4 py-2 rounded w-full bg-black"
 
     const dashLink =
         <>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/manageProducts"
-                >
-                    <FaRegEdit />
-                    Manage Product
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/subscription"
-                >
-                    <FaYoutube />
-                    Subscription
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/salesCollection"
-                >
-                    <FaMoneyBillAlt />
-                    Sales Collection
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/checkout"
-                >
-                    <FaCheck />
-                    Checkout
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/salesSummery"
-                >
-                    <FaDollarSign />
-                    Sales Summery
-                </NavLink>
-            </li>
+
+            {/* manager route */}
+
+            {
+                isManager && <>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/manageProducts"
+                        >
+                            <FaRegEdit />
+                            Manage Product
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/subscription"
+                        >
+                            <FaYoutube />
+                            Subscription
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/salesCollection"
+                        >
+                            <FaMoneyBillAlt />
+                            Sales Collection
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/checkout"
+                        >
+                            <FaCheck />
+                            Checkout
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/salesSummery"
+                        >
+                            <FaDollarSign />
+                            Sales Summery
+                        </NavLink>
+                    </li>
+
+                </>
+            }
 
 
             {/* admin route */}
 
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/manageShop"
-                >
-                    <FaRegEdit />
-                    ManageShop
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    className={linkStyle}
-                    to="/dashboard/adminSummary"
-                >
-                    <FaThList />
-                    Admin Summery
-                </NavLink>
-            </li>
+            {
+                isAdmin && <>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/manageShop"
+                        >
+                            <FaRegEdit />
+                            ManageShop
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className={linkStyle}
+                            to="/dashboard/adminSummary"
+                        >
+                            <FaThList />
+                            Admin Summery
+                        </NavLink>
+                    </li>
+                </>
+            }
 
-                {/* normal route */}
+            {/* normal route */}
 
-                <div className="divider"></div> 
+            <div className="divider"></div>
 
             <li>
                 <NavLink
@@ -93,6 +147,7 @@ const Dashboard = () => {
 
             <li>
                 <button
+                    onClick={handleLogout}
                     className={linkStyle}
                 >
                     <FaShoppingBag />

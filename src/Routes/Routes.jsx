@@ -19,6 +19,8 @@ import SalesSummery from "../pages/Dashboard/SalesSummery/SalesSummery";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import ManageShop from "../pages/Dashboard/ManageShop/ManageShop";
 import AdminSummery from "../pages/Dashboard/AdminSummery/AdminSummery";
+import Forbidden from "../pages/Forbidden/Forbidden";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login></Login>
+      },
+      {
+        path:'forbidden',
+        element:<Forbidden></Forbidden>
       }
     ]
   },
@@ -92,7 +98,7 @@ export const router = createBrowserRouter([
       // admin routes
       {
         path:'manageShop',
-        element:<ManageShop></ManageShop>
+        element:<AdminRoute><ManageShop></ManageShop></AdminRoute>
       },
       {
         path:'adminSummary',

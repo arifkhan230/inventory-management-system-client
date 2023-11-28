@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../../Components/Container/Container";
 import registerImage from "../../assets/images/loginImage.jpg"
 import { FaLock, FaUserCircle } from "react-icons/fa";
@@ -13,7 +13,8 @@ import { updateProfile } from "firebase/auth";
 const Register = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { createUser } = useAuth()
+    const { createUser } = useAuth();
+    const navigate = useNavigate()
 
     const handleRegister = async (event) => {
         event.preventDefault()
@@ -65,9 +66,12 @@ const Register = () => {
                             .then(res => {
                                 console.log(res.data)
                                 toast.success('successfully registered')
+                                window.location.reload()
+                                
                             })
+                            navigate('/createShop')
 
-                        // window.location.reload()
+                       
 
                     })
                     .catch(error => {
