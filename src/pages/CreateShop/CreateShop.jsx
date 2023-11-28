@@ -3,13 +3,16 @@ import Container from "../../Components/Container/Container";
 import useAuth from "../../Hooks/useAuth";
 import { imageUpload } from "../../api/utils";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 
 const CreateShop = () => {
 
     const { user } = useAuth();
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate()
 
     const handleCreateShop = async (event) => {
         event.preventDefault();
@@ -48,6 +51,7 @@ const CreateShop = () => {
                 if (res.data.modifiedCount > 0) {
                     toast.success('Shop Added successfully')
                     console.log(res)
+                    navigate('/dashboard/manageProducts')
                 }
             }
             else {
@@ -69,6 +73,9 @@ const CreateShop = () => {
 
     return (
         <div className="my-10">
+            <Helmet>
+                <title>NexGen Inventor || Create Shop</title>
+            </Helmet>
             <Container>
                 <div className="flex justify-center px-4 items-center">
                     <div className="border-2 bg-gray-100 px-8 py-10 w-full md:w-2/3">

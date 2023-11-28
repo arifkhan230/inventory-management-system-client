@@ -4,6 +4,7 @@ import useProducts from "../../../Hooks/useProducts";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const Products = () => {
@@ -46,89 +47,102 @@ const Products = () => {
 
     return (
         <div>
-            <div className="flex justify-between items-center my-10  border-b-2 border-t-2">
-                <h2 className="text-3xl font-bold">Total {products?.length} Products</h2>
-                <Link to="/dashboard/addProduct">
-                    <button className="btn btn-primary">Add Product</button>
-                </Link>
-            </div>
+            <Helmet>
+                <title>NexGen Inventory || Manage Products</title>
+            </Helmet>
+            {
+                products.length ? <div>
+                    <div className="flex justify-between items-center my-10  border-b-2 border-t-2">
+                        <h2 className="text-3xl font-bold">Total {products?.length} Products</h2>
+                        <Link to="/dashboard/addProduct">
+                            <button className="btn btn-primary">Add Product</button>
+                        </Link>
+                    </div>
 
-            <div>
-                <div className="overflow-x-auto">
-                    <table className="table">
-                        {/* head */}
-                        <thead className="bg-gray-200">
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>Product Name</th>
-                                <th>Product Image</th>
-                                <th>Product Quantity</th>
-                                <th>Sale Count</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div>
+                        <div className="overflow-x-auto">
+                            <table className="table">
+                                {/* head */}
+                                <thead className="bg-gray-200">
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>Product Name</th>
+                                        <th>Product Image</th>
+                                        <th>Product Quantity</th>
+                                        <th>Sale Count</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            {
-                                products?.map((product, idx) => <tr key={product._id}>
-                                    <th>
-                                        {
-                                            idx + 1
-                                        }
-                                    </th>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="w-24 rounded">
-                                                    <img src={product?.image} alt="Product image" />
+                                    {
+                                        products?.map((product, idx) => <tr key={product._id}>
+                                            <th>
+                                                {
+                                                    idx + 1
+                                                }
+                                            </th>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="w-24 rounded">
+                                                            <img src={product?.image} alt="Product image" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {
-                                            product.productName
-                                        }
-                                    </td>
-                                    <td>
-                                        {
-                                            product.quantity
-                                        }
-                                    </td>
-                                    <td>
-                                        {
-                                            product.saleCount
-                                        }
-                                    </td>
-                                    <th>
-                                        <Link to={`/dashboard/updateProduct/${product._id}`}>
-                                            <button
-                                                className="btn btn-md bg-[#2eca7f]">
-                                                <FaEdit className="text-white 
-                                        text-2xl"></FaEdit>
-                                            </button>
-                                        </Link>
-                                    </th>
-                                    <th>
-                                        <button
-                                            onClick={() => handleDeleteProduct(product._id)}
-                                            className="btn btn-ghost bg-red-500 btn-md">
-                                            <FaTrashAlt className="text-white"></FaTrashAlt>
-                                        </button>
-                                    </th>
+                                            </td>
+                                            <td>
+                                                {
+                                                    product.productName
+                                                }
+                                            </td>
+                                            <td>
+                                                {
+                                                    product.quantity
+                                                }
+                                            </td>
+                                            <td>
+                                                {
+                                                    product.saleCount
+                                                }
+                                            </td>
+                                            <th>
+                                                <Link to={`/dashboard/updateProduct/${product._id}`}>
+                                                    <button
+                                                        className="btn btn-md bg-[#2eca7f]">
+                                                        <FaEdit className="text-white 
+                                            text-2xl"></FaEdit>
+                                                    </button>
+                                                </Link>
+                                            </th>
+                                            <th>
+                                                <button
+                                                    onClick={() => handleDeleteProduct(product._id)}
+                                                    className="btn btn-ghost bg-red-500 btn-md">
+                                                    <FaTrashAlt className="text-white"></FaTrashAlt>
+                                                </button>
+                                            </th>
 
-                                </tr>)
-                            }
-                        </tbody>
+                                        </tr>)
+                                    }
+                                </tbody>
 
 
 
-                    </table>
-                </div>
-            </div>
+                            </table>
+                        </div>
+                    </div>
+                </div> :
+                    <div className="flex flex-col justify-center items-center h-screen">
+                        <h2 className="text-4xl font-extrabold mb-6">You Have Not Added Any Product Yet!!</h2>
+                        <Link to="/dashboard/addProduct">
+                            <button className="btn bg-[#2eca7f] text-white">Add Product</button>
+                        </Link>
+                    </div>
+            }
         </div>
     );
 };

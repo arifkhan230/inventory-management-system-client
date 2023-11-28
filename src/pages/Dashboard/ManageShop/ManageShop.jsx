@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 
 const ManageShop = () => {
@@ -17,6 +18,9 @@ const ManageShop = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>NexGen Inventory || Manage Shop</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-center my-10">Manage Shops</h2>
 
             <div className="overflow-x-auto mt-10">

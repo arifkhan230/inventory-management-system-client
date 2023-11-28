@@ -29,10 +29,10 @@ const Login = () => {
                 toast.success("Logged in successfully")
                 const res = await axiosSecure.get(`/users/${result.user?.email}`)
                 console.log(res.data.role)
-                if (res.data.role === 'admin') {
-                    navigate('/dashboard/manageShop')
+                if (res?.data?.role === 'admin') {
+                    navigate('/dashboard/adminSummary')
                 }
-                if (res.data.role === 'manager') {
+                else if(res?.data?.role === 'manager') {
                     navigate('/dashboard/manageProducts')
                 }
                 else {
@@ -64,10 +64,10 @@ const Login = () => {
                     })
                 const res = await axiosSecure.get(`/users/${result.user?.email}`)
                 console.log(res.data.role)
-                if (res.data.role === 'admin') {
+                if (res?.data?.role === 'admin') {
                     navigate('/dashboard/manageShop')
                 }
-                if (res.data.role === 'manager') {
+                if (res?.data?.role === 'manager') {
                     navigate('/dashboard/manageProducts')
                 }
                 else {

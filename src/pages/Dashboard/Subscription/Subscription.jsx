@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -5,6 +6,9 @@ import { Link } from "react-router-dom";
 const Subscription = () => {
     return (
         <div>
+            <Helmet>
+                <title>NexGen Inventory || Subscription</title>
+            </Helmet>
             <h2 className="text-3xl my-10">Choose a package</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3  gap-6">

@@ -4,6 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../api/utils";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const AddProduct = () => {
@@ -81,6 +82,7 @@ const AddProduct = () => {
             if (res.data.modifiedCount > 0) {
                 await refetch()
                 toast.success("product added successfully")
+                navigate('/dashboard/manageProducts')
             }
         }
 
@@ -88,6 +90,9 @@ const AddProduct = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>NexGen Inventory || Add Product</title>
+            </Helmet>
             <div className="flex justify-center px-4 items-center">
                 <div className="border-2 bg-gray-100 px-8 py-10 w-full ">
                     <h2 className="text-3xl font-bold text-center my-6">Add Product </h2>

@@ -21,12 +21,14 @@ import ManageShop from "../pages/Dashboard/ManageShop/ManageShop";
 import AdminSummery from "../pages/Dashboard/AdminSummery/AdminSummery";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <div className="text-5xl">Error</div>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -61,37 +63,37 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'manageProducts',
-        element: <Products></Products>
+        element: <ManagerRoute><Products></Products></ManagerRoute>
       },
       {
         path: 'addProduct',
-        element: <AddProduct></AddProduct>
+        element: <ManagerRoute><AddProduct></AddProduct></ManagerRoute>
       },
       {
         path: 'updateProduct/:id',
-        element: <UpdateProduct></UpdateProduct>,
+        element: <ManagerRoute><UpdateProduct></UpdateProduct></ManagerRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/singleProduct/${params.id}`)
 
       },
       {
         path:'salesCollection',
-        element:<SalesCollection></SalesCollection>
+        element:<ManagerRoute><SalesCollection></SalesCollection></ManagerRoute>
       },
       {
         path:'checkout',
-        element:<Checkout></Checkout>
+        element:<ManagerRoute><Checkout></Checkout></ManagerRoute>
       },
       {
         path: 'subscription',
-        element: <Subscription></Subscription>
+        element: <ManagerRoute><Subscription></Subscription></ManagerRoute>
       },
       {
         path: 'salesSummery',
-        element:<SalesSummery></SalesSummery>
+        element:<ManagerRoute><SalesSummery></SalesSummery></ManagerRoute>
       },
       {
         path:'payment/:amount',
-        element:<Payment></Payment>
+        element:<ManagerRoute><Payment></Payment></ManagerRoute>
       },
       
 
@@ -102,7 +104,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'adminSummary',
-        element:<AdminSummery></AdminSummery>
+        element:<AdminRoute><AdminSummery></AdminSummery></AdminRoute>
       }
     ]
   }

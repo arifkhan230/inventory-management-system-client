@@ -97,7 +97,7 @@ const CheckoutForm = ({ amount }) => {
                             .then(response=>{
                                 console.log(response.data)
                                     if(response?.data?.modifiedCount){
-                                        navigate("/dashboard/salesSummery")
+                                        navigate("/dashboard/salesCollection")
                                         toast.success("Payment Success")
                                     }
                                 }

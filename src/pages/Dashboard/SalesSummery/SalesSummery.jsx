@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -28,6 +29,9 @@ const SalesSummery = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>NexGen Inventory || Sales Summery</title>
+            </Helmet>
             <div className="flex gap-6 justify-around">
                 <div className="bg-blue-400 p-10 text-center text-white">
                     <h2 className="text-2xl text-center">Total Sales</h2>

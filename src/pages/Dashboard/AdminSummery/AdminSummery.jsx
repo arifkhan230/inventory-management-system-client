@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useState } from "react";
+import useAuth from "../../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 
 const AdminSummery = () => {
     const axiosSecure = useAxiosSecure();
-    const [page,setPage] = useState(0)
+    const [page, setPage] = useState(0);
+    const { user } = useAuth()
 
     const { data: TotalProducts = [] } = useQuery({
         queryKey: ['totalProducts'],
@@ -29,16 +32,28 @@ const AdminSummery = () => {
     })
 
 
-    const { data: {result = [], count=0} ={} } = useQuery({
-        queryKey: ['allUsers',page],
+    const { data: { result = [], count = 0 } = {} } = useQuery({
+        queryKey: ['allUsers', page],
         queryFn: () =>
             axiosSecure.get(`/users?page=${page}`)
                 .then(res => {
                     return res.data;
-                    
+
                 })
 
     })
+
+    const { data: adminData } = useQuery({
+        queryKey: ["adminData", user.email],
+        queryFn: () => 
+            axiosSecure.get(`/users/systemAdmin/${user.email}`)
+                .then(res => {
+                    return res.data
+                })
+        
+    })
+
+    console.log(adminData)
 
 
     const totalPages = Math.ceil(count / 5);
@@ -63,12 +78,14 @@ const AdminSummery = () => {
     return (
         <div>
             <h2 className="text-3xl font-bold text-center my-10">Admin Summery </h2>
-
+            <Helmet>
+                <title>NexGen Inventory || Admin Summery</title>
+            </Helmet>
 
             <div className="flex gap-6 justify-around">
                 <div className="bg-blue-400 p-10 text-center text-white">
                     <h2 className="text-2xl text-center">Total Income</h2>
-                    <p className="text-2xl font-bold"></p>
+                    <p className="text-2xl font-bold">$ {adminData?.income}</p>
                 </div>
                 <div className="bg-blue-400 p-10 text-center text-white">
                     <h2 className="text-3xl text-center">Total Product</h2>
@@ -80,7 +97,7 @@ const AdminSummery = () => {
                 </div>
             </div>
             <div className="mt-12">
-                <h2 className="text-3xl font-bold text-center">System Users</h2>
+                <h2 className="text-3xl font-bold text-center">All Users</h2>
                 <div className="overflow-x-auto mt-10">
                     <table className="table w-full">
                         {/* head */}
@@ -123,13 +140,13 @@ const AdminSummery = () => {
                 </div>
             </div>
             <div className="text-center my-10">
-                
-               {
-                pages.map((item,index)=> <button 
-                className={` w-7 h-7 rounded-full mr-4 ${page == index ? "text-white bg-black" : "text-black"}`} 
-                key={index} 
-                onClick={()=>setPage(index)}>{index + 1}</button>)
-               }
+
+                {
+                    pages.map((item, index) => <button
+                        className={` w-7 h-7 rounded-full mr-4 ${page == index ? "text-white bg-black" : "text-black"}`}
+                        key={index}
+                        onClick={() => setPage(index)}>{index + 1}</button>)
+                }
             </div>
         </div>
     );

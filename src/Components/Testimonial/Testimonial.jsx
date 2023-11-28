@@ -1,4 +1,7 @@
 import { PropTypes } from "prop-types";
+
+
+
 const Testimonial = ({ testimonial }) => {
   return (
     <div className="flex flex-col bg-base-100 border shadow-xl rounded-md relative my-5">

@@ -1,18 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
 import Container from "../../../Components/Container/Container";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 
 const FAQ = () => {
+
+    useEffect(()=>{
+        AOS.init()
+    },[])
+
     return (
         <div className="my-10">
             <h2 className="text-3xl font-bold text-center">FAQ</h2>
             <Container>
                 <div className="flex flex-col md:flex-row my-20 gap-6 px-4 lg:px-0">
 
-                    <div className="flex-1">
+                    <div className="flex-1" data-aos="fade-right">
                         <img className="h-[650px] object-cover rounded-md  w-full" src={"https://i.ibb.co/p08Lf9b/african-american-man-wearing-round-glasses.jpg"} alt="" />
                     </div>
-                    <div className="flex-1 bg-white p-6 border shadow-xl rounded">
+                    <div className="flex-1 bg-white p-6 border shadow-xl rounded" data-aos="fade-left">
                         <div className="collapse collapse-arrow bg-base-200 mb-4">
                             <input type="radio" name="my-accordion-2" checked="checked" />
                             <div className="collapse-title text-xl font-medium">

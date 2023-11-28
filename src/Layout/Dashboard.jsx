@@ -6,6 +6,7 @@ import useManager from "../Hooks/useManager";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 
 const Dashboard = () => {
@@ -159,7 +160,11 @@ const Dashboard = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>NexGen Inventory || Dashboard</title>
+            </Helmet>
             <div className="min-h-screen  flex flex-col md:flex-row ">
+
                 <div>
                     <div className="hidden lg:block min-h-full w-64 bg-zinc-200 px-10 py-5 space-y-3">
                         <span className="text-xl font-medium">My System</span>

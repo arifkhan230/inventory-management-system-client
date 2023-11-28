@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
+import { Helmet } from "react-helmet-async";
 
 
 const Checkout = () => {
@@ -90,8 +91,10 @@ const Checkout = () => {
 
     return (
         <div>
-            <h2 className="text-3xl font-bold text-center my-10"> Check page</h2>
-
+            <Helmet>
+                <title>NexGen Inventory || CheckOut</title>
+            </Helmet>
+            <h2 className="text-3xl font-bold text-center my-10"> Check Out </h2>
 
             <div className="overflow-x-auto mt-10">
                 <table className="table w-full">

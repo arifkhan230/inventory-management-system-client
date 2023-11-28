@@ -3,6 +3,7 @@ import useProducts from "../../../Hooks/useProducts";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const SalesCollection = () => {
@@ -66,6 +67,9 @@ const SalesCollection = () => {
     // setProducts(products)
     return (
         <div className="my-10">
+            <Helmet>
+                <title>NexGen Inventory || Sales Collection</title>
+            </Helmet>
             <div className="flex justify-between">
                 <div className="join">
                     <form  onSubmit={handleSearch} >

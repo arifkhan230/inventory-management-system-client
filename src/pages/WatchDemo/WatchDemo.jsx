@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 
 
 const WatchDemo = () => {
     return (
         <div>
+            <Helmet>
+                <title>NexGen Inventory || Watch Demo</title>
+            </Helmet>
             <h2 className="text-3xl font-bold text-center my-10"> Welcome!! </h2>
             <p className="text-center text-xl mb-4">Before Using Our System Watch This Video and Get Some Ideas How Our System Works. </p>
 
