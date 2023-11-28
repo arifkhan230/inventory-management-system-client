@@ -15,6 +15,10 @@ import Subscription from "../pages/Dashboard/Subscription/Subscription";
 import UpdateProduct from "../pages/Dashboard/UpdateProduct/UpdateProduct";
 import SalesCollection from "../pages/Dashboard/SalesCollection/SalesCollection";
 import Checkout from "../pages/Dashboard/Checkout/Checkout";
+import SalesSummery from "../pages/Dashboard/SalesSummery/SalesSummery";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import ManageShop from "../pages/Dashboard/ManageShop/ManageShop";
+import AdminSummery from "../pages/Dashboard/AdminSummery/AdminSummery";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +78,25 @@ export const router = createBrowserRouter([
       {
         path: 'subscription',
         element: <Subscription></Subscription>
+      },
+      {
+        path: 'salesSummery',
+        element:<SalesSummery></SalesSummery>
+      },
+      {
+        path:'payment/:amount',
+        element:<Payment></Payment>
+      },
+      
+
+      // admin routes
+      {
+        path:'manageShop',
+        element:<ManageShop></ManageShop>
+      },
+      {
+        path:'adminSummary',
+        element:<AdminSummery></AdminSummery>
       }
     ]
   }

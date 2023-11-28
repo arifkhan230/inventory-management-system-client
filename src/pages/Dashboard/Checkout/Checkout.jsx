@@ -2,13 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import jsPDF from "jspdf";
 
 
 const Checkout = () => {
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const doc = new jsPDF();
 
-    const { data: cartProducts = [],isLoading,refetch } = useQuery({
+    const { data: cartProducts = [], isLoading, refetch } = useQuery({
         queryKey: ["cartProducts", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/cartProducts/${user?.email}`)
@@ -39,11 +41,13 @@ const Checkout = () => {
 
         }
 
+
+
         axiosSecure.post('/salesProduct', saleProduct)
             .then(res => {
                 console.log(res.data)
                 if (res?.data?.insertedId) {
-                    
+
                     axiosSecure.get(`/singleProduct/${product.productId}`)
                         .then(res => {
                             console.log(res.data)
@@ -53,19 +57,27 @@ const Checkout = () => {
                                 saleCount, quantity
                             }
                             axiosSecure.patch(`/product/${product.productId}`, newQuantity)
-                            .then(res=>{
-                                console.log(res.data)
-                                if(res.data.modifiedCount > 0){
-                                    axiosSecure.delete(`/sold-product-delete/${product._id}`)
-                                    .then(res=>{
-                                        if(res.data.deletedCount){
-                                            refetch()
-                                            toast.success("Product sold successfully")
-                                        }
-                                    })
-                                }
-                            })
-                            
+                                .then(res => {
+                                    console.log(res.data)
+                                    if (res.data.modifiedCount > 0) {
+                                        axiosSecure.delete(`/sold-product-delete/${product._id}`)
+                                            .then(res => {
+                                                if (res.data.deletedCount) {
+                                                    refetch()
+                                                    toast.success("Product sold successfully")
+                                                   
+
+                                                    // doc.text(`${product.shopName}`,100,20,null,null, "center");
+                                                    // doc.addImage(`${product.image}`, "JPEG", 15, 40, 180, 100);
+                                                    // doc.text(`Product Name :${product.productName}`, 20, 160);
+                                                    // doc.text(`selling Price :${product.sellingPrice}`, 20, 170);
+                                                    // doc.text(`Discount Price :${product.discount}`, 20, 180);
+                                                    // doc.save(`${product.shopName}.pdf`)
+                                                }
+                                            })
+                                    }
+                                })
+
                         })
 
 

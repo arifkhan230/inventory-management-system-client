@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import Container from "../Components/Container/Container";
-import { FaBars, FaCheck, FaHome, FaMoneyBillAlt, FaRegEdit, FaShoppingBag, FaYoutube } from "react-icons/fa";
+import { FaBars, FaCheck, FaDollarSign, FaHome, FaMandalorian, FaMoneyBillAlt, FaRegEdit, FaServer, FaShoppingBag, FaThList, FaYoutube } from "react-icons/fa";
 
 
 const Dashboard = () => {
@@ -48,13 +48,49 @@ const Dashboard = () => {
             <li>
                 <NavLink
                     className={linkStyle}
+                    to="/dashboard/salesSummery"
+                >
+                    <FaDollarSign />
+                    Sales Summery
+                </NavLink>
+            </li>
+
+
+            {/* admin route */}
+
+            <li>
+                <NavLink
+                    className={linkStyle}
+                    to="/dashboard/manageShop"
+                >
+                    <FaRegEdit />
+                    ManageShop
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    className={linkStyle}
+                    to="/dashboard/adminSummary"
+                >
+                    <FaThList />
+                    Admin Summery
+                </NavLink>
+            </li>
+
+                {/* normal route */}
+
+                <div className="divider"></div> 
+
+            <li>
+                <NavLink
+                    className={linkStyle}
                     to="/"
                 >
                     <FaHome />
                     Home
                 </NavLink>
             </li>
-            
+
             <li>
                 <button
                     className={linkStyle}
@@ -98,7 +134,7 @@ const Dashboard = () => {
                                     aria-label="close sidebar"
                                     className="drawer-overlay"
                                 ></label>
-                                
+
                                 <ul className=" w-80 min-h-full px-10 bg-base-200 text-base-content">
                                     {dashLink}
                                 </ul>

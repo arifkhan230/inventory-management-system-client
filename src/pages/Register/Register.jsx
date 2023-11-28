@@ -59,7 +59,7 @@ const Register = () => {
                             email: result.user.email,
                             name: result.user.displayName
                         }
-                        console.log('profile updated')
+                        // console.log('profile updated')
 
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
@@ -72,6 +72,7 @@ const Register = () => {
                     })
                     .catch(error => {
                         console.log(error)
+                        toast.error(error.message)
                     })
             })
             .catch(err => {

@@ -19,17 +19,19 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log({ email, password })
+        // console.log({ email, password })
 
         // signIn with email password
         signIn(email,password)
         .then(result=>{
             console.log(result)
+            toast.success("Logged in successfully")
             
         })
 
         .catch(err=>{
             console.log(err.message)
+            toast.error(err.message)
         })
     }
 
