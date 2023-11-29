@@ -94,7 +94,7 @@ const Checkout = () => {
             <Helmet>
                 <title>NexGen Inventory || CheckOut</title>
             </Helmet>
-            <h2 className="text-3xl font-bold text-center my-10"> Check Out </h2>
+            <h2 className="text-3xl font-bold text-center my-10"> Check-Out Here </h2>
 
             <div className="overflow-x-auto mt-10">
                 <table className="table w-full">
@@ -135,7 +135,7 @@ const Checkout = () => {
                                     {product.productName}
                                 </td>
                                 <td>{product.quantity}</td>
-                                <td>{product._id}</td>
+                                <td>{product.productId}</td>
                                 <td>{product.discount}</td>
                                 <td>$ {product.sellingPrice}</td>
                                 <th>

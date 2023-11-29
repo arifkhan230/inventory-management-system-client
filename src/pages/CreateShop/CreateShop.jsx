@@ -51,7 +51,7 @@ const CreateShop = () => {
                 if (res.data.modifiedCount > 0) {
                     toast.success('Shop Added successfully')
                     console.log(res)
-                    navigate('/dashboard/manageProducts')
+                    navigate('/dashboard')
                 }
             }
             else {

@@ -47,16 +47,20 @@ const SalesSummery = () => {
             <Helmet>
                 <title>NexGen Inventory || Sales Summery</title>
             </Helmet>
-            <div className="flex gap-6 justify-around">
-                <div className="bg-blue-400 p-10 text-center text-white">
-                    <h2 className="text-2xl text-center">Total Sales</h2>
+            <div className="flex flex-col md:flex-row gap-6 justify-around">
+                <div className="bg-blue-400 flex-1  p-10 text-center text-white">
+                    <h2 className="text-3xl text-center">Sales</h2>
                     <p className="text-2xl font-bold">{sales?.result?.length}</p>
                 </div>
-                <div className="bg-blue-400 p-10 text-center text-white">
+                <div className="bg-blue-400 flex-1  p-10 text-center text-white">
+                    <h2 className="text-3xl text-center">Total Sales</h2>
+                    <p className="text-2xl font-bold">$ {totalSalesProduct}</p>
+                </div>
+                <div className="bg-blue-400 p-10 flex-1 text-center text-white">
                     <h2 className="text-3xl text-center">Total Invest</h2>
                     <p className="text-2xl font-bold">$ {totalInvest}</p>
                 </div>
-                <div className="bg-blue-400 p-10 text-center text-white">
+                <div className="bg-blue-400 p-10 flex-1 text-center text-white">
                     <h2 className="text-3xl text-center">Total Profit</h2>
                     <p className="text-2xl font-bold">$ {profit}</p>
                 </div>

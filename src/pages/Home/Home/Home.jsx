@@ -4,6 +4,7 @@ import FAQ from "../FAQ/FAQ";
 import Footer from "../Footer/Footer";
 import Testimonials from "../Testimonials/Testimonials";
 import SellingPoints from "../SellingPoints/SellingPoints";
+import OurLocation from "../OurLocation/OurLocation";
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
            <SellingPoints></SellingPoints>
            <FAQ></FAQ>
            <Testimonials></Testimonials>
+           <OurLocation></OurLocation>
            <Footer></Footer>
         </div>
     );
