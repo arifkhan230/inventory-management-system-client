@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../Components/Loading/Loading";
 
 
 const SalesCollection = () => {
@@ -60,7 +61,7 @@ const SalesCollection = () => {
     }
 
     if(isLoading){
-        return <p>loading......</p>
+        return <Loading></Loading>
     }
 
 
@@ -82,12 +83,12 @@ const SalesCollection = () => {
                         <button 
                         
                         type="submit"
-                        className="btn join-item bg-black text-white rounded">Search</button>
+                        className="btn join-item bg-[#2eca7f] text-white">Search</button>
                     </form>
                 </div>
                 <Link to="/dashboard/checkout">
-                    <button className="btn btn-neutral text-white">
-                        Proceed checkout
+                    <button className="btn bg-[#2eca7f] hover:bg-[#6610f2]  text-white">
+                        Proceed Checkout
                     </button>
                 </Link>
             </div>
@@ -131,12 +132,12 @@ const SalesCollection = () => {
                                 </td>
                                 <td>{product.quantity}</td>
                                 <td>{product._id}</td>
-                                <td>{product.discount}</td>
+                                <td>{product.discount} %</td>
                                 <td>$ {product.sellingPrice}</td>
                                 <th>
                                     <button
                                         onClick={() => handleAddToCart(product)}
-                                        className="btn btn-outline btn-md">Add For check-out</button>
+                                        className="btn hover:bg-[#2eca7f] bg-[#6610f2] text-white btn-md">Add For check-out</button>
                                 </th>
                             </tr>)
                         }

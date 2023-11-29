@@ -21,8 +21,8 @@ const Testimonials = () => {
   console.log(testimonials);
   return (
     <Container>
-      <div className="pb-20" data-aos="fade-up"   data-aos-duration="3000">
-        
+      <div className="pb-20" data-aos="fade-up" data-aos-duration="3000">
+
         <div className="text-center py-10">
           <h2 className="text-4xl font-bold text-center my-10">Testimonials</h2>
         </div>

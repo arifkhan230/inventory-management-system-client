@@ -9,7 +9,7 @@ const Subscription = () => {
             <Helmet>
                 <title>NexGen Inventory || Subscription</title>
             </Helmet>
-            <h2 className="text-3xl my-10">Choose a package</h2>
+            <h2 className="text-4xl font-bold text-center my-10">Choose a Package</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3  gap-6">
                 {/* card - 1  */}

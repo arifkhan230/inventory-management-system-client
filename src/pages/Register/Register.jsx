@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { imageUpload } from "../../api/utils";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
@@ -87,6 +88,9 @@ const Register = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>NexGen Inventory || Register</title>
+            </Helmet>
             <div className="flex mt-20 px-4">
                 {/* image div */}
                 <div className="hidden md:flex flex-1">
@@ -159,7 +163,7 @@ const Register = () => {
                         </div>
 
                         <div className='mt-6'>
-                            <button className='btn w-full text-white  bg-purple-400 hover:bg-purple-600' type="submit">Register</button>
+                            <button className='btn w-full text-white  bg-[#2eca7f] hover:bg-[#6610f2] ' type="submit">Register</button>
                         </div>
                     </form>
                     <p

@@ -1,13 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/images/inventory.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NexGen Inventory</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/assets/images/inventory.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexGen Inventory</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("IiKMFi9pDUk9AELt4");
+    })();
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

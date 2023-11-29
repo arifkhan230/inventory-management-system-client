@@ -12,8 +12,8 @@ const FAQ = () => {
     },[])
 
     return (
-        <div className="my-10">
-            <h2 className="text-3xl font-bold text-center">FAQ</h2>
+        <div className="my-20">
+            <h2 className="text-3xl font-bold text-center">Have Question?</h2>
             <Container>
                 <div className="flex flex-col md:flex-row my-20 gap-6 px-4 lg:px-0">
 

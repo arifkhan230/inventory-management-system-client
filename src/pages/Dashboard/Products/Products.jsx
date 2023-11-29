@@ -52,10 +52,10 @@ const Products = () => {
             </Helmet>
             {
                 products.length ? <div>
-                    <div className="flex justify-between items-center my-10  border-b-2 border-t-2">
-                        <h2 className="text-3xl font-bold">Total {products?.length} Products</h2>
+                    <div className="flex justify-between items-center my-10 border-b-2 border-t-2 ">
+                        <h2 className="text-3xl font-bold">Total {products?.length} Product Added</h2>
                         <Link to="/dashboard/addProduct">
-                            <button className="btn btn-primary">Add Product</button>
+                            <button className="btn text-white bg-[#2eca7f] hover:bg-[#6610f2] ">Add Product</button>
                         </Link>
                     </div>
 
@@ -68,8 +68,8 @@ const Products = () => {
                                         <th>
                                             #
                                         </th>
-                                        <th>Product Name</th>
                                         <th>Product Image</th>
+                                        <th>Product Name</th>
                                         <th>Product Quantity</th>
                                         <th>Sale Count</th>
                                         <th>Update</th>

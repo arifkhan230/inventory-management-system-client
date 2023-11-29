@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { signIn, signInGoogle, } = useAuth();
@@ -84,6 +85,9 @@ const Login = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>NexGen Inventory || Login</title>
+            </Helmet>
             <div className="flex mt-20 px-4 items-center ">
                 {/* image div */}
                 <div className="hidden md:flex w-1/2">
@@ -122,7 +126,7 @@ const Login = () => {
                         </div>
                         <div className='mt-6'>
                             <button
-                                className='btn w-full text-white  bg-purple-400 hover:bg-purple-600' type="submit">Login</button>
+                                className='btn w-full text-white  hover:bg-[#6610f2] bg-[#2eca7f]' type="submit">Login</button>
                         </div>
                     </form>
                     <p

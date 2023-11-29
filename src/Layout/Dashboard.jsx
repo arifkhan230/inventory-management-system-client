@@ -7,6 +7,8 @@ import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import Footer from "../pages/Home/Footer/Footer";
+import logo from "../assets/images/nexgen.png"
 
 
 const Dashboard = () => {
@@ -163,16 +165,16 @@ const Dashboard = () => {
             <Helmet>
                 <title>NexGen Inventory || Dashboard</title>
             </Helmet>
-            <div className="min-h-screen  flex flex-col md:flex-row ">
+            <div className="min-h-screen flex flex-col md:flex-row ">
 
                 <div>
-                    <div className="hidden lg:block min-h-full w-64 bg-zinc-200 px-10 py-5 space-y-3">
-                        <span className="text-xl font-medium">My System</span>
+                    <div className="hidden lg:block min-h-full w-64 border-l-2 border-r-2 px-4 py-5 space-y-3">
+                    <img className="object-cover" src={logo} alt="" />
                         <ul className="menu">{dashLink}</ul>
                     </div>
 
                     <div className="lg:hidden">
-                        <div className="drawer ">
+                        <div className="drawer z-50 ">
                             <input
                                 id="my-drawer"
                                 type="checkbox"
@@ -186,7 +188,7 @@ const Dashboard = () => {
                                 >
                                     <FaBars className="text-xl" />
                                 </label>
-                                <span className="text-xl">My System </span>
+                                <img className="w-60 h-16 object-cover" src={logo} alt="" />
                             </div>
                             <div className="drawer-side ">
                                 <label
@@ -195,17 +197,19 @@ const Dashboard = () => {
                                     className="drawer-overlay"
                                 ></label>
 
-                                <ul className=" w-80 min-h-full px-10 bg-base-200 text-base-content">
+                                <ul className=" w-80 min-h-full px-10 pt-20 bg-base-200 text-base-content">
                                     {dashLink}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex-1 p-10">
-                    <Outlet></Outlet>
+                <div className="flex-1 min-h-screen p-10">
+                    <div className="min-h-[60vh] mb-10"><Outlet></Outlet></div>
+                    <Footer></Footer>
                 </div>
             </div>
+            
         </Container>
     );
 };

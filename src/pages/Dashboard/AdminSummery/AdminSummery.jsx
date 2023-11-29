@@ -131,7 +131,7 @@ const AdminSummery = () => {
                                     </td>
                                     <td>
                                         {!item?.role &&
-                                            <button className="btn btn-primary">Send Promotional email</button>}
+                                            <button className="btn bg-[#2eca7f] hover:bg-[#6610f2] text-white">Send Promotional email</button>}
                                     </td>
                                 </tr>)
                             }

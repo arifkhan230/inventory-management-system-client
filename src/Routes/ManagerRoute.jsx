@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import useManager from '../Hooks/useManager';
 import useAuth from '../Hooks/useAuth';
 import { Navigate } from 'react-router-dom';
+import Loading from '../Components/Loading/Loading';
 
 const ManagerRoute = ({children}) => {
     const {user,loading} = useAuth();
     const [isManager, isManagerLoading] = useManager()
 
     if(loading || isManagerLoading){
-        return <p>loading.....</p>
+        return <Loading></Loading>
     }
 
     if(user && isManager){

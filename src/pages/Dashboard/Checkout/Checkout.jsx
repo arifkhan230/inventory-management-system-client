@@ -141,7 +141,7 @@ const Checkout = () => {
                                 <th>
                                     <button
                                         onClick={() => handleGetPaid(product)}
-                                        className="btn btn-outline btn-md">Get Paid</button>
+                                        className="btn bg-[#2eca7f] text-white hover:bg-[#6610f2] btn-md">Get Paid</button>
                                 </th>
                             </tr>)
                         }

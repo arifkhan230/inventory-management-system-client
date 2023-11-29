@@ -159,7 +159,7 @@ const CreateShop = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="btn btn-primary text-white w-full my-6">
+                                className="btn bg-[#2eca7f] hover:bg-[#6610f2] text-white w-full my-6">
                                 Create Shop
                             </button>
                         </form>
