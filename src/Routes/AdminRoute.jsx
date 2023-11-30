@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
 import { Navigate } from 'react-router-dom';
+import Loading from '../Components/Loading/Loading';
 
 
 const AdminRoute = ({children}) => {
@@ -9,7 +10,7 @@ const AdminRoute = ({children}) => {
     const [isAdmin,isAdminLoading] = useAdmin()
 
     if(loading || isAdminLoading){
-        return <p>loading.....</p>
+        return <Loading></Loading>
     }
 
     if(user && isAdmin){

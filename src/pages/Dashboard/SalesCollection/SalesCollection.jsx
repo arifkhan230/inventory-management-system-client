@@ -34,6 +34,10 @@ const SalesCollection = () => {
     const handleAddToCart = (product) => {
         // console.log(Object.keys(product).toString())
 
+        if(product.quantity <= 0){
+            return toast.error("Product Not Available")
+        }
+
         const cartData = {
             productId:product?._id,
             shopName:product?.shopName,

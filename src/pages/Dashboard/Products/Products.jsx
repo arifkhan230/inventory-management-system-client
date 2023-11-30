@@ -5,15 +5,18 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../Components/Loading/Loading";
+import useAuth from "../../../Hooks/useAuth";
 
 
 const Products = () => {
     const [products, isLoading, refetch] = useProducts();
     const axiosSecure = useAxiosSecure()
+    const { user } = useAuth()
     console.log(products)
 
 
-    const handleDeleteProduct = id => {
+    const handleDeleteProduct = product => {
         Swal.fire({
             title: "Are you sure?",
             text: "You Want to Delete this product",
@@ -24,10 +27,22 @@ const Products = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
-                axiosSecure.delete(`/shopProduct/${id}`)
+                axiosSecure.delete(`/shopProduct/${product._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
+
+                            axiosSecure.get(`/shops/${user.email}`)
+                                .then(res => {
+                                    console.log(res.data);
+                                    const newLimit = {
+                                        limit: parseInt(res.data.limit) + 1
+                                    }
+                                    axiosSecure.patch(`/shop-update-quantity/${res?.data?._id}`, newLimit)
+                                        .then(res => {
+                                            console.log(res.data);
+                                        })
+                                })
+
                             refetch();
                             Swal.fire({
                                 title: "Deleted!",
@@ -42,7 +57,7 @@ const Products = () => {
 
 
     if (isLoading) {
-        return <p>Loading.....</p>
+        return <Loading></Loading>
     }
 
     return (
@@ -120,7 +135,7 @@ const Products = () => {
                                             </th>
                                             <th>
                                                 <button
-                                                    onClick={() => handleDeleteProduct(product._id)}
+                                                    onClick={() => handleDeleteProduct(product)}
                                                     className="btn btn-ghost bg-red-500 btn-md">
                                                     <FaTrashAlt className="text-white"></FaTrashAlt>
                                                 </button>

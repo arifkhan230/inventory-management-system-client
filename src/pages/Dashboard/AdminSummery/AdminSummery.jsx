@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../Components/Loading/Loading";
 
 
 const AdminSummery = () => {
@@ -10,7 +11,7 @@ const AdminSummery = () => {
     const [page, setPage] = useState(0);
     const { user } = useAuth()
 
-    const { data: TotalProducts = [] } = useQuery({
+    const { data: TotalProducts = [] ,isPending} = useQuery({
         queryKey: ['totalProducts'],
         queryFn: () =>
             axiosSecure.get('/allProducts')
@@ -75,6 +76,10 @@ const AdminSummery = () => {
 
     // const totalSalesAmount = TotalSales.reduce((total, item) => total + item.sellingPrice, 0)
 
+    if(isPending){
+        return <Loading></Loading>
+    }
+
     return (
         <div>
             <h2 className="text-3xl font-bold text-center my-10">Admin Summery </h2>
@@ -82,16 +87,16 @@ const AdminSummery = () => {
                 <title>NexGen Inventory || Admin Summery</title>
             </Helmet>
 
-            <div className="flex gap-6 justify-around">
-                <div className="bg-blue-400 p-10 text-center text-white">
+            <div className="flex flex-col md:flex-row gap-6 justify-around">
+                <div className="bg-blue-400 flex-1 p-10 text-center text-white">
                     <h2 className="text-2xl text-center">Total Income</h2>
                     <p className="text-2xl font-bold">$ {adminData?.income}</p>
                 </div>
-                <div className="bg-blue-400 p-10 text-center text-white">
+                <div className="bg-blue-400 flex-1 p-10 text-center text-white">
                     <h2 className="text-3xl text-center">Total Product</h2>
                     <p className="text-2xl font-bold">{TotalProducts?.length}</p>
                 </div>
-                <div className="bg-blue-400 p-10 text-center text-white">
+                <div className="bg-blue-400 flex-1 p-10 text-center text-white">
                     <h2 className="text-3xl text-center">Total Sales</h2>
                     <p className="text-2xl font-bold">{TotalSales?.length}</p>
                 </div>
