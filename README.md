@@ -11,9 +11,9 @@ NexGen is a dynamic inventory management system that empowers users to seamlessl
 - Users management
 - Shop management
 
-#### Technologies used
-- Front-end: HTML, CSS,Tailwind, JavaScript React,
-- Back-End: Express.js Node.js MongoDB,
-- Payment: Stripe.js react
+##Technologies used
+#### Front-end: HTML, CSS,Tailwind, JavaScript React,
+#### Back-End: Express.js Node.js MongoDB,
+#### Payment: Stripe.js react
 
 #### Website link (https://inventory-management-ea297.web.app/)
