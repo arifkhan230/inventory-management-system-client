@@ -5,11 +5,12 @@ import Footer from "../Footer/Footer";
 import Testimonials from "../Testimonials/Testimonials";
 import SellingPoints from "../SellingPoints/SellingPoints";
 import OurLocation from "../OurLocation/OurLocation";
+import Contact from "./Contact/Contact";
 
 
 const Home = () => {
     return (
-        <div>
+        <div className="overflow-hidden">
             
             <Helmet>
                 <title>NexGen Inventory || Home</title>
@@ -18,6 +19,7 @@ const Home = () => {
            <SellingPoints></SellingPoints>
            <FAQ></FAQ>
            <Testimonials></Testimonials>
+           <Contact></Contact>
            <OurLocation></OurLocation>
            <Footer></Footer>
         </div>

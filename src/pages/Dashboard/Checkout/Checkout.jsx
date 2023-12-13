@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../../Components/Loading/Loading";
 
 
 const Checkout = () => {
@@ -11,7 +12,7 @@ const Checkout = () => {
     const axiosSecure = useAxiosSecure();
     const doc = new jsPDF();
 
-    const { data: cartProducts = [], isLoading, refetch } = useQuery({
+    const { data: cartProducts = [], isPending, refetch } = useQuery({
         queryKey: ["cartProducts", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/cartProducts/${user?.email}`)
@@ -68,12 +69,13 @@ const Checkout = () => {
                                                     toast.success("Product sold successfully")
                                                    
 
-                                                    // doc.text(`${product.shopName}`,100,20,null,null, "center");
-                                                    // doc.addImage(`${product.image}`, "JPEG", 15, 40, 180, 100);
-                                                    // doc.text(`Product Name :${product.productName}`, 20, 160);
-                                                    // doc.text(`selling Price :${product.sellingPrice}`, 20, 170);
-                                                    // doc.text(`Discount Price :${product.discount}`, 20, 180);
-                                                    // doc.save(`${product.shopName}.pdf`)
+
+                                                    doc.text(`${product.shopName}`,100,20,null,null, "center");
+                                                    doc.addImage(`${product.image}`, "JPEG", 15, 40, 180, 100);
+                                                    doc.text(`Product Name :${product.productName}`, 20, 160);
+                                                    doc.text(`selling Price :${product.sellingPrice}`, 20, 170);
+                                                    doc.text(`Discount Price :${product.discount}`, 20, 180);
+                                                    doc.save(`${product.shopName}.pdf`)
                                                 }
                                             })
                                     }
@@ -88,6 +90,10 @@ const Checkout = () => {
     }
 
     console.log(cartProducts);
+
+    if(isPending){
+        return <Loading></Loading>
+    }
 
     return (
         <div>
