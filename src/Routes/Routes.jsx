@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
       {
         path: 'updateProduct/:id',
         element: <ManagerRoute><UpdateProduct></UpdateProduct></ManagerRoute>,
-        loader: ({params}) => fetch(`https://inventory-management-system-server-livid.vercel.app/${params.id}`)
+        loader: ({params}) => fetch(`http://localhost:5000/${params.id}`)
 
       },
       {
